@@ -1,0 +1,37 @@
+# Production: Team Sync server behind Caddy (automatic HTTPS certificates).
+# Configure with a .env file next to this one (see .env.example), then: docker compose up -d
+services:
+  team-sync:
+    image: ${TEAM_SYNC_IMAGE:?set TEAM_SYNC_IMAGE in .env}:${TEAM_SYNC_VERSION:-latest}
+    restart: unless-stopped
+    environment:
+      LOCK_TTL_SECONDS: ${LOCK_TTL_SECONDS:-90}
+      MAX_FILE_MB: ${MAX_FILE_MB:-100}
+      LOG_LEVEL: ${LOG_LEVEL:-info}
+    volumes:
+      - team-sync-data:/data
+      - ./backups:/backups
+    # Not published: only reachable through Caddy.
+    expose:
+      - "8787"
+
+  caddy:
+    image: caddy:2
+    restart: unless-stopped
+    depends_on:
+      - team-sync
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
+    environment:
+      DOMAIN: ${DOMAIN:?set DOMAIN in .env}
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy-data:/data
+      - caddy-config:/config
+
+volumes:
+  team-sync-data:
+  caddy-data:
+  caddy-config:

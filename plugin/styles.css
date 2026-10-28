@@ -1,0 +1,29 @@
+.team-sync-status {
+  cursor: pointer;
+}
+
+.nav-file-title.team-sync-locked::after {
+  content: "🔒 " attr(data-team-sync-user);
+  margin-left: auto;
+  padding-left: var(--size-4-2);
+  font-size: var(--font-ui-smaller);
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+/* Note locked by someone else: banner on top, no caret. */
+.cm-editor.team-sync-readonly::before {
+  content: "🔒 " attr(data-team-sync-user) " sta modificando questa nota · sola lettura";
+  display: block;
+  margin: 0 auto var(--size-4-2);
+  max-width: var(--file-line-width);
+  padding: var(--size-4-1) var(--size-4-3);
+  border-radius: var(--radius-s);
+  background-color: var(--background-modifier-hover);
+  color: var(--text-muted);
+  font-size: var(--font-ui-small);
+}
+
+.cm-editor.team-sync-readonly .cm-content {
+  caret-color: transparent;
+}

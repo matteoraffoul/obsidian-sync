@@ -1,0 +1,5 @@
+{$DOMAIN} {
+	encode zstd gzip
+	# HTTP API and the WebSocket (/api/ws) go through the same proxy.
+	reverse_proxy team-sync:8787
+}

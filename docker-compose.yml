@@ -1,0 +1,16 @@
+services:
+  team-sync:
+    build:
+      context: .
+      dockerfile: server/Dockerfile
+    restart: unless-stopped
+    ports:
+      - "8787:8787"
+    environment:
+      LOCK_TTL_SECONDS: "90"
+      MAX_FILE_MB: "100"
+    volumes:
+      - team-sync-data:/data
+
+volumes:
+  team-sync-data:

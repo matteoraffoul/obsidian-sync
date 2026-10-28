@@ -1,0 +1,21 @@
+{
+  "name": "@team-sync/server",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "build": "esbuild src/index.ts src/cli.ts --bundle --platform=node --target=node22 --format=esm --external:fastify --external:@fastify/websocket --outdir=dist --out-extension:.js=.js",
+    "start": "node dist/index.js",
+    "dev": "npm run build && node dist/index.js",
+    "user": "node dist/cli.js user",
+    "typecheck": "tsc -p ."
+  },
+  "dependencies": {
+    "@fastify/websocket": "^11.0.0",
+    "fastify": "^5.0.0"
+  },
+  "devDependencies": {
+    "@team-sync/shared": "*",
+    "@types/ws": "^8.5.0"
+  }
+}

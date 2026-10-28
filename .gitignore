@@ -1,0 +1,8 @@
+node_modules/
+dist/
+data/
+plugin/main.js
+*.log
+.omc/
+.env
+deploy/backups/

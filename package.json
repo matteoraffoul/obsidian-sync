@@ -1,0 +1,25 @@
+{
+  "name": "obsidian-team-sync",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Obsidian plugin + backend to share a vault on a server, with file locks so several people can work at the same time.",
+  "workspaces": [
+    "shared",
+    "server",
+    "plugin"
+  ],
+  "scripts": {
+    "build": "npm run build -w server && npm run build -w plugin",
+    "typecheck": "npm run typecheck -w shared -w server -w plugin",
+    "test": "vitest run",
+    "check": "npm run typecheck && vitest run",
+    "bump": "node scripts/bump-version.mjs"
+  },
+  "devDependencies": {
+    "@types/node": "^24.10.0",
+    "esbuild": "^0.28.0",
+    "typescript": "~5.9.3",
+    "vitest": "^5.0.0"
+  }
+}

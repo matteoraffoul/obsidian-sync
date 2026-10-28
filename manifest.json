@@ -1,0 +1,9 @@
+{
+  "id": "team-sync",
+  "name": "Team Sync",
+  "version": "0.1.0",
+  "minAppVersion": "1.8.7",
+  "description": "Keeps the vault on a shared server and locks notes while someone edits them, so a team can work on the same vault at the same time.",
+  "author": "Matteo Raffoul",
+  "isDesktopOnly": false
+}
